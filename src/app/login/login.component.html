@@ -1,0 +1,67 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()" [ngClass]="{'was-validated':! loginForm.pristine}">
+    <div class="container center-block">
+        <div class="row justify-content-center">
+            <div class="card" style="width: 20rem;">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Bienvenidos!!</h1>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <label for="usuario">Usuario:</label>
+                        <input type="email" [ngModel] = "" class="form-control" id="usuario" name="usuario" placeholder="Usuario"
+                            required required formControlName="usuario">
+                        <div [hidden]="loginForm.controls.usuario.valid || loginForm.controls.usuario.pristine"
+                            class="alert alert-danger">
+                            Campo requerido!
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                            required formControlName="password">
+
+                    </div>
+
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" [disabled]="loginForm.invalid"
+                            class="btn btn-primary btn-lg btn-block">Ingresar</button>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row" *ngIf="errorInicio">
+                    <label class="float right" style="color: red;">Usuario y/o Password invalidas</label>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <label class="float right">Si no tienes una cuenta aun registrate <a href="#"
+                                (click)="CrearCuenta()">Aqui</a>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
