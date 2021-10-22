@@ -1,22 +1,24 @@
+import { EtiquetasEnum } from "./EtiquetasEnum";
 import { CategoriaEnum } from "./Registrar/CategoriaEnum";
 
 export class Revista{
 
     nombre: String;
-    etiqueta: String;
+    etiqueta: EtiquetasEnum;
     costo: String;
-    fecha: String;
+    fechaCreacion: String;
     descripcion: String
     autor: String
     categoria: CategoriaEnum;
 
 
 
-    constructor(nombre:String, etiqueta:String, costo:String,fecha:String, descripcion:String, autor:String, categoria:CategoriaEnum) {;
+    constructor(nombre:String, etiqueta:EtiquetasEnum, costo:String,fecha:String, descripcion:String, autor:String, categoria:CategoriaEnum) {
+
         this.nombre = nombre;
         this.etiqueta = etiqueta;
         this.costo = costo;
-        this.fecha = fecha;
+        this.fechaCreacion = fecha;
         this.descripcion = descripcion;
         this.autor = autor;
         this.categoria = categoria;
@@ -36,7 +38,7 @@ export class Revista{
         return this.etiqueta;
     }
 
-    set setEtiqueta(etiqueta: String) {
+    set setEtiqueta(etiqueta: EtiquetasEnum) {
         this.etiqueta= etiqueta;
     }
 
@@ -48,12 +50,12 @@ export class Revista{
         this.costo = costo;
     }
 
-    get getFecha() {
-        return this.fecha;
+    get getFechaCreacion() {
+        return this.fechaCreacion;
     }
 
-    set setFecha(fecha: String) {
-        this.fecha = fecha;
+    set setFechaCreacion(fecha: String) {
+        this.fechaCreacion = fecha;
     }
 
     get getDescripcion() {

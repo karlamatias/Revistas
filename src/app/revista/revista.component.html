@@ -1,5 +1,4 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" >
     <div class="container-fluid">
 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -23,22 +22,48 @@
                 </li>
 
                 <li class="nav-item">
-                    <a style="margin-left: 10 px; border: none;" class="btn btn-outline-light"
-                        href="perfil()">Perfil</a>
+                    <a style="margin-left: 10 px; border: none;" class="btn btn-outline-light" href="perfil()">Crear
+                        Nuevo Perfil</a>
+                </li>
+
+                <li class="nav-item">
+                    <a style="margin-left: 10 px; border: none;" class="btn btn-outline-light" (click)="Verperfil()">Ver
+                        mi Perfil</a>
                 </li>
 
             </ul>
 
+
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <a href="#" (click)="logout()">
-                    Cerrar Sesion
+        <div class="dropdown" >
+            <button  style="border: none" class="btn btn-outline-light dropdown-toggle" type="button"
+          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >
+        
+            </button>
+            <div class="dropdown-menu text-center">
+                <a class="dropdown-item" href="#">
+                  
                 </a>
+                <a class="dropdown-item" *ngFor="let listado of listadoUsuario"> {{listado.usuario}}</a>
+                <a class="dropdown-item" *ngFor="let listado of listadoUsuario" >{{listado.rol}}</a>
+                <div class="dropdown-divider"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="#" (click)="logout()">
+                            Cerrar Sesion
+                        </a>
+                    </div>
+
+                </div>
+
+
             </div>
 
         </div>
+
     </div>
+
+
 
 </nav>

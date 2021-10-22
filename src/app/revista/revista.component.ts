@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Registrarse } from '../Modelo/Registrar/Registrarse';
 import { Revista } from '../Modelo/Revista';
+import { Editor } from '../Modelo/Editor';
+import { RolEnum } from '../Modelo/Registrar/RolEnum';
 
 @Component({
   selector: 'app-revista',
@@ -9,12 +12,15 @@ import { Revista } from '../Modelo/Revista';
 })
 export class RevistaComponent implements OnInit {
 
-
+  //listadoUsuario: Registrarse[] = [];
+  listadoUsuario: Editor[] = []
   usuario:any = {};
 
-  constructor(private router: Router) { }
+  @Input() listado!: Editor;
+  constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
+
   }
 
   publicar() {
@@ -32,6 +38,11 @@ export class RevistaComponent implements OnInit {
   }
   listar(){
     location.href = "/listar";
+
+  }
+
+  Verperfil(){
+    location.href = "/listar-perfil";
 
   }
 

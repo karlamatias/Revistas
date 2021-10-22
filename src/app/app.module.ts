@@ -15,7 +15,17 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { ListarComponent } from './listar/listar.component';
 import { EditarComponent } from './editar/editar.component';
 import { RevistaComponent } from './revista/revista.component';
-import {ServiceService}from '../app/Service/service.service'
+import {ServiceService}from '../app/Service/service.service';
+import { AdministradorComponent } from './administrador/administrador.component';
+import { SuscripcionComponent } from './suscripcion/suscripcion.component';
+import { TarjetaComponent } from './tarjeta/tarjeta.component';
+import { ListarPerfilComponent } from './listar-perfil/listar-perfil.component';
+import { BuscarComponent } from './buscar/buscar.component';
+import { NuevoComponent } from './nuevo/nuevo.component';
+import { RolDirective } from './rol.directive';
+import { AnuncioComponent } from './anuncio/anuncio.component';
+import { ListarAnunciosComponent } from './listar-anuncios/listar-anuncios.component'
+import { PrincipalComponent } from './principal/principal.component';
 
 
 @NgModule({
@@ -29,14 +39,24 @@ import {ServiceService}from '../app/Service/service.service'
     PerfilComponent,
     ListarComponent,
     EditarComponent,
-    RevistaComponent
+    RevistaComponent,
+    AdministradorComponent,
+    SuscripcionComponent,
+    TarjetaComponent,
+    ListarPerfilComponent,
+    BuscarComponent,
+    NuevoComponent,
+    RolDirective,
+    AnuncioComponent,
+    ListarAnunciosComponent,
+    PrincipalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers:[ServiceService],
   bootstrap: [AppComponent]

@@ -14,7 +14,7 @@ export class Registrarse {
     }
 
     get getUsuario() {
-        return this.usuario
+        return this.usuario;
 
     }
 
@@ -24,7 +24,7 @@ export class Registrarse {
     }
 
     get getPassword() {
-        return this.password
+        return this.password;
 
     }
 
@@ -34,7 +34,7 @@ export class Registrarse {
     }
 
     get getRol() {
-        return this.rol
+        return this.rol;
 
     }
 

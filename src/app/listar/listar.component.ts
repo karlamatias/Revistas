@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { Revista } from '../Modelo/Revista';
-import { RevistaComponent } from '../revista/revista.component';
 import{ServiceService}from '../Service/service.service'; 
 
 
@@ -13,14 +11,39 @@ import{ServiceService}from '../Service/service.service';
 export class ListarComponent implements OnInit {
 
 
-  revistas: Revista[] = [];
-  constructor(private service: ServiceService, private router:Router) { 
+  listadoRevistas: Revista[] = [];
+revista!: Revista;
 
-    
+
+  @Input() listado!: Revista;
+  constructor(private servicio: ServiceService) { 
+
+    servicio.Listar()
+    .subscribe((listadoRevistas: Revista[]) => {
+      this.listadoRevistas = listadoRevistas;
+    });
   }
 
-  ngOnInit(){
+  ngOnInit(): void{
     
 
 }
+
+publicar() {
+  location.href = "/publicar";
+
+}
+
+regresar() {
+  location.href = "/revista";
+}
+
+
+Editar(revista: Revista): void{
+  //envio el codigo de la revista seleccionada 
+localStorage.setItem("nombre", revista.nombre.toString());
+location.href = "/editar";
+console.log("nombre")
+}
+
 }

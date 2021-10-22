@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { Revista } from '../Modelo/Revista';
 import { ServiceService } from '../Service/service.service';
 import { CategoriaEnum } from '../Modelo/Registrar/CategoriaEnum';
+import { EtiquetasEnum } from '../Modelo/EtiquetasEnum';
 
 @Component({
   selector: 'app-publicar',
@@ -11,45 +12,37 @@ import { CategoriaEnum } from '../Modelo/Registrar/CategoriaEnum';
   styleUrls: ['./publicar.component.css']
 })
 export class PublicarComponent implements OnInit {
+
+  @Input()
+  data!: Revista;
+  editar: boolean = false;
+
   error: boolean = false;
-
-  week: any = [
-    "Lunes",
-    "Martes",
-    "Miercoles",
-    "Jueves",
-    "Viernes",
-    "Sabado",
-    "Domingo"
-  ];
-
-
   revista: Revista;
+  etiquetaEnum = EtiquetasEnum;
   revistaForm!: FormGroup;
   showError: boolean = false;
   showSuccess: boolean = false;
   message: String = "";
   catenum = CategoriaEnum;
 
-  monthSelect!: any[];
-  dateSelect: any;
-  dateValue: any;
-  day: any;
 
-  constructor(private formBuilder: FormBuilder, private service: ServiceService) { 
-    this.revista = new Revista("", "", "", "", "", "", CategoriaEnum.Otro)
+  constructor(private formBuilder: FormBuilder, private service: ServiceService) {
+    this.revista = new Revista("", EtiquetasEnum.DesarrolloWeb, "", "", "", "", CategoriaEnum.Otro)
   }
 
   ngOnInit(): void {
-    this.getDaysFromDate(11, 2020)
+    this.editar = this.data != null;
+
     this.revistaForm = this.formBuilder.group({
       nombre: [null, Validators.required],
+      etiqueta: [null],
       costo: [null, Validators.required],
       fecha: [null, Validators.required],
       descripcion: [null, Validators.required],
       autor: [null, Validators.required],
-      categoria: [null, Validators.required],
-      
+      categoria: [null, Validators.required]
+
     });
   }
 
@@ -61,22 +54,42 @@ export class PublicarComponent implements OnInit {
       console.log("Enviar datos al servidor");
 
       this.service.publiar(this.revistaForm.value)
-         .subscribe((creado: Revista)=>{
-        
-          this.revistaForm.reset({
-            "nombre": null,
-            "costo": null,
-            "categoria": null,
-            "descripcion": null,
-            "autor": null,
-            "fecha": null
+        .subscribe((creado: Revista) => {
 
-          });
+          this.reset();
           console.log("Revista Publicada");
           console.log(creado);
           this.showError = false;
           this.showSuccess = true;
-          this.message = "Revista Publicada exitosamente!!" ;
+          this.message = "Revista Publicada exitosamente!!";
+        }, (error: any) => {
+          console.log("Hubo un error");
+          console.log(error);
+          this.showError = true;
+          this.message = error.error.message;
+        });
+
+
+    }
+  }
+
+  public guardar() {
+
+    if (this.revistaForm.valid) {
+      console.log(this.revistaForm.value);
+      console.log("Enviar datos al servidor");
+      this.data.nombre = this.revistaForm.value.nombre;
+      this.data.costo = this.revistaForm.value.costo;
+      this.data.categoria = this.revistaForm.value.categoria;
+      this.data.descripcion = this.revistaForm.value.descripcion;
+      this.data.fechaCreacion = this.revistaForm.value.fechaCreacion;
+      this.service.actualizar(this.data)
+        .subscribe(() => {
+
+          this.reset();
+          this.showError = false;
+          this.showSuccess = true;
+          this.message = "Revista Editada exitosamente!!";
         }, (error: any) => {
           console.log("Hubo un error");
           console.log(error);
@@ -89,46 +102,49 @@ export class PublicarComponent implements OnInit {
   }
 
 
-  getDaysFromDate(month: number, year: number) {
 
-    const startDate = moment .utc(`${year}/${month}/01`)
-    const endDate = startDate.clone().endOf('month')
-    this.dateSelect = startDate;
 
-    const diffDays = endDate.diff(startDate, 'days', true)
-    const numberDays = Math.round(diffDays);
+  reset(): void {
 
-    const arrayDays = Object.keys([...Array(numberDays)]).map((a: any) => {
-      a = parseInt(a) + 1;
-      const dayObject = moment(`${year}-${month}-${a}`);
-      return {
-        name: dayObject.format("dddd"),
-        value: a,
-        indexWeek: dayObject.isoWeekday()
-      };
-    });
+    if (this.editar) {
+      this.revistaForm.reset({
+        nombre: this.data.nombre,
+        etiqueta: this.data.etiqueta,
+        costo: this.data.costo,
+        categoria: this.data.categoria,
+        descripcion: this.data.descripcion,
+        autor: this.data.autor,
+        fecha: this.data.fechaCreacion
 
-    this.monthSelect = arrayDays;
-  }
-  changeMonth(flag: number) {
-    if (flag < 0) {
-      const prevDate = this.dateSelect.clone().subtract(1, "month");
-      this.getDaysFromDate(prevDate.format("MM"), prevDate.format("YYYY"));
+      });
+
     } else {
-      const nextDate = this.dateSelect.clone().add(1, "month");
-      this.getDaysFromDate(nextDate.format("MM"), nextDate.format("YYYY"));
+
+
+
+
+      this.revistaForm.reset({
+        nombre: null,
+        etiqueta: null,
+        costo: null,
+        categoria: null,
+        descripcion: null,
+        autor: null,
+        fecha: null
+
+      });
     }
   }
 
-  clickDay(day: { value: any; }) {
-    const monthYear = this.dateSelect.format('YYYY-MM')
-    const parse = `${monthYear}-${day.value}`
-    const objectDate = moment(parse)
-    this.dateValue = objectDate;
 
-
+  subir(): void {
+    if (this.editar) {
+      this.guardar();
+    } else {
+      this.publicar();
+    }
   }
-  
+
   regresar() {
     location.href = "/revista";
   }
