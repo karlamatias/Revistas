@@ -120,7 +120,7 @@
                 <small>Introduzca la fecha de Creacion de su revista</small>
 
                 <div class="col-md-12">
-                    <input type="text" placeholder="Fecha" class="form-control" required formControlName="fecha">
+                    <input type="text" placeholder="YYYY-mm-dd" class="form-control" required formControlName="fecha">
                     <div [hidden]="revistaForm.controls.fecha.valid || revistaForm.controls.fecha.pristine"
                         class="alert alert-danger">
                         Campo requerido!

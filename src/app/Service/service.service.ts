@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Comentario } from '../Modelo/Comentario';
 import { Editor } from '../Modelo/Editor';
 import { Perfil } from '../Modelo/Perfil';
 import { Registrarse } from '../Modelo/Registrar/Registrarse';
@@ -79,5 +80,9 @@ export class ServiceService {
   public actualizarRevista(revista: Revista) {
     return this.http.put<Revista>(this.API_URL + "Editar" + revista.nombre, revista)
 
+  }
+
+  public comentar(comentario: Comentario): Observable<Comentario> {
+    return this.http.post<Comentario>(this.API_URL + "comentar", comentario);
   }
 }

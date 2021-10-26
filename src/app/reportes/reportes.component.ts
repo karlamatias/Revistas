@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ReporteserviceService } from '../suscripcion/reporteservice.service';
 
 @Component({
   selector: 'app-reportes',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private servicio: ReporteserviceService) { 
+
+  
+  }
 
   ngOnInit(): void {
   }
 
+  reporte(){
+
+    location.href="/reporte";
+    
+  }
+
+  regresar(){
+
+    location.href="/administrador";
+  }
 }

@@ -23,13 +23,14 @@ export class TarjetaComponent implements OnInit {
   tipoEnum = tipoSuscripcion;
   showError: boolean = false;
   showSuccess: boolean = false;
+  messagetarjeta: String = "";
   message: String = "";
 
   @Input() listado!: Revista;
   constructor(private formBuilder: FormBuilder, private servicio: ServiceService) {
 
     this.tarjeta = new Tarjeta(0, "", "", 0)
-    this.suscribir = new Suscribir(0, "", "", tipoSuscripcion.Anunal, "", 0,"");
+    this.suscribir = new Suscribir(0, "", "", tipoSuscripcion.Anunal, "", 0, "");
 
     servicio.ListarRev()
       .subscribe((listadoRevistas: Revista[]) => {
@@ -68,16 +69,16 @@ export class TarjetaComponent implements OnInit {
         .subscribe((agregar: Tarjeta) => {
 
 
-          console.log("Revista Publicada");
+          console.log("Tarjeta Agregada");
           console.log(agregar);
           this.showError = false;
           this.showSuccess = true;
-          this.message = "Revista Publicada exitosamente!!";
+          this.messagetarjeta = "Su tarjeta se agrego correctamente";
         }, (error: any) => {
           console.log("Hubo un error");
           console.log(error);
           this.showError = true;
-          this.message = error.error.message;
+          this.messagetarjeta = error.error.message;
         });
 
 
@@ -93,12 +94,14 @@ export class TarjetaComponent implements OnInit {
       this.servicio.suscribir(this.suscripcionform.value)
         .subscribe((agregar: Suscribir) => {
 
-
-          console.log("Revista Publicada");
+          this.reset();
+          this.showError = false;
+          this.showSuccess = true;
+          console.log("Suscripcion Exitosa");
           console.log(agregar);
           this.showError = false;
           this.showSuccess = true;
-          this.message = "Revista Publicada exitosamente!!";
+          this.message = "Se suscribio correctamente!!";
         }, (error: any) => {
           console.log("Hubo un error");
           console.log(error);
@@ -109,6 +112,23 @@ export class TarjetaComponent implements OnInit {
 
     }
   }
+
+
+  reset(): void {
+
+
+    this.form.reset({
+      numero: null,
+      propietario: null,
+      vigencia: null,
+      cvv: null
+
+    });
+  }
+
+
+
+
 
 
   regresar() {

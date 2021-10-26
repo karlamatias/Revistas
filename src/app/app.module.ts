@@ -26,6 +26,9 @@ import { RolDirective } from './rol.directive';
 import { AnuncioComponent } from './anuncio/anuncio.component';
 import { ListarAnunciosComponent } from './listar-anuncios/listar-anuncios.component'
 import { PrincipalComponent } from './principal/principal.component';
+import { ReporteseditorComponent } from './reporteseditor/reporteseditor.component';
+import { ComentarioComponent } from './comentario/comentario.component';
+import { ReporteComponent } from './reporte/reporte.component';
 
 
 @NgModule({
@@ -49,7 +52,10 @@ import { PrincipalComponent } from './principal/principal.component';
     RolDirective,
     AnuncioComponent,
     ListarAnunciosComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    ReporteseditorComponent,
+    ComentarioComponent,
+    ReporteComponent
   ],
   imports: [
     BrowserModule,

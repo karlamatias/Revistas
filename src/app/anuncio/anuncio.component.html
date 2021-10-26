@@ -92,6 +92,18 @@
                             </div>
                         </div>
                         <br>
+                        <b>Fecha Creacion:</b>
+                        <small>Introduzca la fecha de Creacion del Anuncio</small>
+
+                        <div class="col-md-12">
+                            <input type="text" placeholder="yyyy/MM/DD" class="form-control" required
+                                formControlName="fecha">
+                            <div [hidden]="anuncioForm.controls.fecha.valid || anuncioForm.controls.fecha.pristine"
+                                class="alert alert-danger">
+                                Campo requerido!
+                            </div>
+                        </div>
+                        <br>
                         <b>Etiqueta:</b>
                         <small>Seleccione una etiqueta para su Revista</small>
 

@@ -32,7 +32,7 @@ export class AnuncioComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, private service: CargaanuncioService) {
-    this.anuncio = new Anuncio("", "",0, EtiquetasEnum.DesarrolloWeb, "", "", "")
+    this.anuncio = new Anuncio("", "",0, EtiquetasEnum.DesarrolloWeb, "", "", "","")
   }
 
 
@@ -49,8 +49,8 @@ export class AnuncioComponent implements OnInit {
       etiqueta: [null],
       texto: [null],
       imagen: [null],
-      video: [null]
-      
+      video: [null],
+      fecha: [null, Validators.required]
 
     });
   }
@@ -92,8 +92,8 @@ export class AnuncioComponent implements OnInit {
         etiqueta: this.data.etiqueta,
         texto: this.data.texto,
         imagen: this.data.imagen,
-        video: this.data.video
-
+        video: this.data.video,
+        fecha: this.data.fecha
       });
 
     } else {

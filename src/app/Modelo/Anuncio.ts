@@ -10,8 +10,9 @@ export class Anuncio{
     texto: String;
     imagen: String;
     video: String;
+    fecha: String;
 
-    constructor(nombre:String,costo:String, dias: number, etiqueta:EtiquetasEnum, texto: String, imagen: String, video: String) {;
+    constructor(nombre:String,costo:String, dias: number, etiqueta:EtiquetasEnum, texto: String, imagen: String, video: String, fecha: String) {;
 
          this.nombre = nombre;
          this.costo = costo;
@@ -20,7 +21,7 @@ export class Anuncio{
          this.texto = texto;
          this.imagen = imagen;
          this.video = video;
-         
+         this.fecha = fecha;
      }
 
      get getNombre() {
@@ -79,6 +80,12 @@ export class Anuncio{
         this.video = video;
     }
 
+    get getFecha() {
+        return this.fecha;
+    }
 
+    set setFecha(fecha: String) {
+        this.fecha = fecha;
+    }
 
     }

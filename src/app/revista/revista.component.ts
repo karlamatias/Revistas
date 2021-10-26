@@ -29,7 +29,7 @@ export class RevistaComponent implements OnInit {
   }
   
   reportes() {
-    location.href = "/reportes";
+    location.href = "/reporteseditor";
 
   }
   perfil(){

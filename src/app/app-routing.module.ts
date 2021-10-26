@@ -17,6 +17,9 @@ import { RevistaComponent } from './revista/revista.component';
 import { SuscripcionComponent } from './suscripcion/suscripcion.component';
 import { TarjetaComponent } from './tarjeta/tarjeta.component';
 import { PrincipalComponent } from './principal/principal.component';
+import { ReporteseditorComponent } from './reporteseditor/reporteseditor.component';
+import { ComentarioComponent } from './comentario/comentario.component';
+import { ReporteComponent } from './reporte/reporte.component';
 
 const routes: Routes = [
   //crear la ruta hacia el componente
@@ -36,7 +39,10 @@ const routes: Routes = [
 {path: 'anuncio', component:AnuncioComponent},
 {path: 'editar', component:EditarComponent},
 {path: 'listar-anuncios', component:ListarAnunciosComponent},
-{path: 'principal', component:PrincipalComponent}
+{path: 'principal', component:PrincipalComponent},
+{path: 'reporteseditor', component:ReporteseditorComponent},
+{path: 'comentario', component:ComentarioComponent},
+{path: 'reporte', component:ReporteComponent}
 
 ];
 

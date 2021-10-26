@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="col-md-12 text-white">
+                    <label>Comentar Revista</label>
+                </div>
+                <div class="col-md-8">
+                    <hr>
+                </div>
+
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="/home" (click)="regresar()">
+                    Regresar
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<br>
+
+
+<div *ngIf="showSuccess" class="alert alert-success" role="alert">
+    <div>
+        <h3>{{ message }}</h3>
+    </div>
+</div>
+<br>
+
+<form [formGroup]="comentarform" (ngSubmit)="comentar()" [ngClass]="{'was-validated':! comentarform.pristine}">
+
+
+    <div class="container center-block">
+        <div class="row justify-content-center">
+            <div class="card" style="width: 110rem;">
+
+             
+                <b>Correo:</b>
+                <small>Introduzca su correo para verificar su identidad</small>
+
+                <div class="col-md-12">
+                    <input type="text" placeholder="usuario@usuario.com" class="form-control" required
+                        formControlName="usuario">
+
+                </div>
+                <br>
+
+                <b>Revista:</b>
+                <small>Nombre de la revista en la que realizara su comentario</small>
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <select name="revista" class="custom-select d-block w-100" id="revista"
+                            formControlName="revista" required>
+                            <option>Seleccione una opcion...</option>
+                            <option *ngFor="let listado of listadoRevistas">{{listado.nombre}}
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <br>
+
+
+                <b>Comentario:</b>
+            
+                <div class="col-md-12">
+                    <input type="text"class="form-control" required
+                        formControlName="comentario">
+
+                </div>
+                <br>
+
+     
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit"  [disabled]="comentarform.invalid"
+                    class="btn btn-primary btn-lg btn-block">Comentar!</button>
+            </div>
+        </div>
+
+        <br>
+
+    </div>
+
+
+</form>
