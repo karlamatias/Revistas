@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReporteserviceService } from '../suscripcion/reporteservice.service';
+import { ReporteserviceService } from '../Service/reporteservice.service';
+
 
 @Component({
   selector: 'app-reporte',
