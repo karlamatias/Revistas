@@ -1,0 +1,147 @@
+
+<div *ngIf="showError" class="alert alert-danger">
+    <h3>{{ message }}</h3>
+</div>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="col-md-12 text-white">
+                    <label>Registrar Usuarios</label>
+                </div>
+                <div class="col-md-8">
+                    <hr>
+                </div>
+
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="/administrador" (click)="regresar()">
+                    Regresar
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+<br>
+<div *ngIf="showSuccess" class="alert alert-success" role="alert">
+    <div>
+        <h3>{{ message }}</h3>
+    </div>
+</div>
+<br>
+
+
+<body>
+    <div class="d-flex">
+
+        <div class="col-sm-9 col-md-5 ">
+            <div class="card">
+                <form [formGroup]="registrarseForm" (ngSubmit)="crear()"
+                    [ngClass]="{'was-validated':! registrarseForm.pristine}">
+
+                    <div class="card-body">
+
+                        <div class="col-md-12">
+                            <label for="usuario">Usuario:</label>
+                            <input type="email" class="form-control" id="usuario" name="usuario" placeholder="Usuario"
+                                required required formControlName="usuario">
+                            <div [hidden]="registrarseForm.controls.usuario.valid || registrarseForm.controls.usuario.pristine"
+                                class="alert alert-danger">
+                                Campo requerido!
+                            </div>
+                        </div>
+
+
+                        <div class="form-group d-flex">
+                            <div class="col-md-12">
+                                <label for="password">Contraseña:</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" required formControlName="password">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group d-flex">
+                            <div class="col-md-12">
+                                <label for="rol">Area:</label>
+                                <select name="rol" class="custom-select d-block w-100" id="rol" required
+                                    formControlName="rol">
+                                    <option [ngValue]="null">Seleccione una opcion...</option>
+                                    <option *ngFor="let option of rolenum | keyvalue" [ngValue]="option.key">
+                                        {{option.value}}
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" [disabled]="registrarseForm.invalid"
+                                    class="btn btn-primary btn-lg btn-block">Crear</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-sm-7">
+            <div class="card">
+                <div class="card-body">
+
+
+                    <br>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr *ngFor="let listado of listadoUsuario">
+                                <td>{{ listado.usuario}}</td>
+                                <td>{{ listado.password}}</td>
+                                <td>{{ listado.rol}}</td>
+
+                                <td>
+                                    <a href="#" class="btn btn-warning">Editar</a>
+                                    <a href="#" class="btn btn-danger">Eliminar</a>
+
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</body>

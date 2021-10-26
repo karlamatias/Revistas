@@ -1,0 +1,71 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="col-md-12 text-white">
+                    <label>Suscribir</label>
+                </div>
+                <div class="col-md-8">
+                    <hr>
+                </div>
+
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="/home" (click)="regresar()">
+                    Regresar
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+<br>
+
+<div class="container">
+    <div class="card">
+
+        <div class="card-header">
+            <h3>Revistas</h3>
+        </div>
+        <div class="col-sm-10">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                    
+                        <th>Nombre</th>
+                        <th>Costo</th>
+                        <th>Descripcion</th>
+                        <th>Categoria</th>
+                        <th>Autor</th>
+                        <th>Acciones</th>
+
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr *ngFor="let listado of listadoRevistas">
+                        <td>{{ listado.nombre}}</td>
+                        <td>{{ listado.costo}}</td>
+                        <td>{{ listado.descripcion}}</td>
+                        <td>{{ listado.categoria}}</td>
+                        <td>{{ listado.autor}}</td>
+                        <td>
+                            <button class="btn btn-warning" (click)="suscripcion()">Suscribirme</button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+</div>

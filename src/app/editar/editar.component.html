@@ -1,0 +1,164 @@
+<div *ngIf="showError" class="alert alert-danger">
+    <h3>{{ message }}</h3>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="col-md-12 text-white">
+                    <label>Publicar Revista</label>
+                </div>
+                <div class="col-md-8">
+                    <hr>
+                </div>
+
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="/revista" (click)="regresar()">
+                    Regresar
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<br>
+
+<form [formGroup]="editarForm" (ngSubmit)="Editar()" [ngClass]="{'was-validated':! editarForm.pristine}">
+
+    <div class="container center-block">
+        <div class="row justify-content-center">
+            <div class="card" style="width: 110rem;">
+
+                <div class="input-group mb-3 bg-white">
+
+                    <div class="custom-file ">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01">
+                    </div>
+                </div>
+                <b>Titulo:</b>
+                <small>Introduzca el nombre de su Revista</small>
+
+                <div class="col-md-12">
+                    <input type="text" placeholder="Titulo" class="form-control" required formControlName="nombre">
+                    <div [hidden]="editarForm.controls.nombre.valid || editarForm.controls.nombre.pristine"
+                        class="alert alert-danger">
+                        Campo requerido!
+                    </div>
+                </div>
+                <br>
+                <b>costo:</b>
+                <small>Introduzca el costo de su Revista si sera Publica coloque 0</small>
+
+                <div class="col-md-12">
+                    <input type="text" placeholder="Costo" class="form-control" required formControlName="costo">
+                    <div [hidden]="editarForm.controls.costo.valid || editarForm.controls.costo.pristine"
+                        class="alert alert-danger">
+                        Campo requerido!
+                    </div>
+                </div>
+                <br>
+                <b>Fecha Creacion:</b>
+                <small>Introduzca la fecha de Creacion de su revista</small>
+
+                <div class="col-md-12">
+                    <input type="text" placeholder="Fecha" class="form-control" required formControlName="fecha">
+                    <div [hidden]="editarForm.controls.fecha.valid || editarForm.controls.fecha.pristine"
+                        class="alert alert-danger">
+                        Campo requerido!
+                    </div>
+                </div>
+                <br>
+                <b>Descripcion:</b>
+                <small>Escriba una breve descripcion de su revista</small>
+
+                <div class="col-md-12">
+                    <input type="text" placeholder="Descripcion" class="form-control" required
+                        formControlName="descripcion">
+                    <div [hidden]="editarForm.controls.descripcion.valid || editarForm.controls.descripcion.pristine"
+                        class="alert alert-danger">
+                        Campo requerido!
+                    </div>
+                </div>
+                <br>
+                <b>Autor:</b>
+                <small>Escriba su correo para verificar su identidad</small>
+
+                <div class="col-md-12">
+                    <input type="text" placeholder="Correo" class="form-control" required formControlName="autor">
+                    <div [hidden]="editarForm.controls.autor.valid || editarForm.controls.autor.pristine"
+                        class="alert alert-danger">
+                        Campo requerido!
+                    </div>
+                </div>
+                <br>
+
+                <b>Etiqueta:</b>
+                <small>Seleccione una etiqueta para su Revista</small>
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <select name="etiqueta" class="custom-select d-block w-100" id="etiqueta"
+                            formControlName="etiqueta">
+                            <option [ngValue]="null">Seleccione una opcion...</option>
+                            <option *ngFor="let option of etiquetaEnum | keyvalue" [ngValue]="option.key">{{option.value}}
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <br>
+
+                <b>Categoria:</b>
+                <small>Seleccione la categoria mas apropiada para su publicacion</small>
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <select name="categoria" class="custom-select d-block w-100" id="categoria" required
+                            formControlName="categoria">
+                            <option [ngValue]="null">Seleccione una opcion...</option>
+                            <option *ngFor="let option of catenum | keyvalue" [ngValue]="option.key">{{option.value}}
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+                <br>
+
+                <br>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" [disabled]="editarForm.invalid"
+                    class="btn btn-primary btn-lg btn-block">Guardar</button>
+            </div>
+        </div>
+
+        <br>
+
+    </div>
+
+
+</form>
+<div *ngIf="showSuccess" class="alert alert-primary d-flex align-items-center" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+        class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Success:">
+        <path
+            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+    </svg>
+    <div>
+        <h3>{{ message }}</h3>
+    </div>
+</div>

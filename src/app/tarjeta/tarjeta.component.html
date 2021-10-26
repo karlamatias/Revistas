@@ -1,0 +1,226 @@
+<div *ngIf="showError" class="alert alert-danger">
+    <h3>{{ messagetarjeta }}</h3>
+</div>
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="col-md-12 text-white">
+                    <label>Suscribirme</label>
+                </div>
+                <div class="col-md-8">
+                    <hr>
+                </div>
+
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="/suscripcion" (click)="regresar()">
+                    Regresar
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<br>
+
+<div *ngIf="showSuccess" class="alert alert-success" role="alert">
+    <div>
+        <h3>{{ messagetarjeta }}</h3>
+    </div>
+</div>
+<br>
+
+<body>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+
+                    <th>Nombre</th>
+                    <th>Costo</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr *ngFor="let listado of listadoRevistas">
+                    <td>{{ listado.nombre}}</td>
+                    <td>{{ listado.costo}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="d-flex">
+
+        <div class="col-sm-9 col-md-5 ">
+            <div class="card">
+                <form [formGroup]="form" (ngSubmit)="registrar()" [ngClass]="{'was-validated':! form.pristine}">
+
+                    <div class="card-body">
+
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">
+
+                            </span>
+                            <input formControlName="numero" maxlength="9" type="text" class="form-control"
+                                placeholder="Numero Tarjeta" required>
+                        </div>
+
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text">
+                            </span>
+                            <input formControlName="propietario" type="email" class="form-control"
+                                placeholder="Propietario@propietario.com" required>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="input-group input-group-lg mb-3">
+                                    <span class="input-group-text">
+
+                                    </span>
+                                    <input formControlName="vigencia" maxlength="5" type="text" class="form-control"
+                                        placeholder="MM-DD" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="input-group input-group-lg mb-3">
+                                    <span class="input-group-text">
+
+                                    </span>
+                                    <input formControlName="cvv" maxlength="3" type="password" class="form-control"
+                                        placeholder="CVV" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" [disabled]="form.invalid"
+                                class="btn btn-primary btn-lg btn-block">Aceptar</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="col-sm-7">
+            <div class="card">
+
+                <div *ngIf="showSuccess" class="alert alert-success" role="alert">
+                    <div>
+                        <h3>{{ message}}</h3>
+                    </div>
+                </div>
+
+                <form [formGroup]="suscripcionform" (ngSubmit)="registrarsuscripcion()"
+                    [ngClass]="{'was-validated':! suscripcionform.pristine}">
+                    <div class="card-body">
+
+                        <b>Fecha Suscripcion:</b>
+                        <small>Introduzca la fecha de Suscripcion a su Revista</small>
+
+                        <div class="col-md-12">
+                            <input type="text" placeholder="YYYY-MM-DD" class="form-control" required
+                                formControlName="fechaSuscripcion">
+
+                        </div>
+                        <br>
+
+                        <b>Costo:</b>
+                        <small>Costo de la revista a la que se suscribira</small>
+
+                        <div class="col-md-12">
+                            <input type="text" placeholder="Costo" class="form-control" required
+                                formControlName="costoSuscripcion">
+
+                        </div>
+                        <br>
+
+
+                        <b>Tipo de Suscripcion:</b>
+                        <small>Seleccione un metodo para cobrarle su suscripcion</small>
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <select name="tipoSuscripcion" class="custom-select d-block w-100" id="tipoSuscripcion"
+                                    formControlName="tipoSuscripcion" required>
+                                    <option [ngValue]="null">Seleccione una opcion...</option>
+                                    <option *ngFor="let option of tipoEnum | keyvalue" [ngValue]="option.key">
+                                        {{option.value}}
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <b>Revista:</b>
+                        <small>Nombre de la revista a la que se esta suscribiendo</small>
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <select name="revista" class="custom-select d-block w-100" id="revista"
+                                    formControlName="revista" required>
+                                    <option>Seleccione una opcion...</option>
+                                    <option *ngFor="let listado of listadoRevistas">{{listado.nombre}}
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        <b>Correo:</b>
+                        <small>Introduzca su correo para verificar su identidad</small>
+
+                        <div class="col-md-12">
+                            <input type="email" placeholder="usuario@usuario.com" class="form-control" required
+                                formControlName="usuarioSuscriptor">
+
+                        </div>
+                        <br>
+
+                        <b>Tarjeta:</b>
+                        <small>Introduzca una tarjeta de Credito o Debito Valida</small>
+
+                        <div class="col-md-12">
+                            <input type="text" placeholder="Tarjeta" class="form-control" required
+                                formControlName="tarjeta">
+
+                        </div>
+                        <br>
+                        <div class="d-grid gap-2">
+                            <button type="submit" [disabled]="suscripcionform.invalid"
+                                class="btn btn-primary btn-lg btn-block">Suscribirme</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    
+
+
+
+</body>

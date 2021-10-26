@@ -1,0 +1,88 @@
+<div *ngIf="showError" class="alert alert-danger">
+    <h3>{{ message }}</h3>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="col-md-12 text-white">
+                    <label>Reporte</label>
+                </div>
+                <div class="col-md-8">
+                    <hr>
+                </div>
+
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="/reportes" (click)="regresar()">
+                    Regresar
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<br>
+
+<form [formGroup]="reporteForm" (ngSubmit)="generar()" [ngClass]="{'was-validated':! reporteForm.pristine}">
+
+    <div class="container center-block">
+        <div class="row justify-content-center">
+            <div class="card" style="width: 20rem;">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Generar tu reporte: </h1>
+                    </div>
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <label>Fecha Inicio:</label>
+                        <input type="text" class="form-control" id="inicio" name="inicio" placeholder="YYYY-mm-dd"
+                            required required formControlName="inicio">
+
+                    </div>
+
+                </div>
+                <br>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <label>Fecha final:</label>
+                        <input type="text" class="form-control" id="final" name="final" placeholder="YYYY-mm-dd"
+                            required formControlName="final">
+
+                    </div>
+
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" [disabled]="reporteForm.invalid"
+                            class="btn btn-primary btn-lg btn-block">Generar</button>
+                    </div>
+                </div>
+
+
+
+                <br>
+            </div>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,168 @@
+<div *ngIf="showError" class="alert alert-danger">
+    <h3>{{ message }}</h3>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <div class="col-md-12 text-white">
+                    <label>Crear Anuncios</label>
+                </div>
+                <div class="col-md-8">
+                    <hr>
+                </div>
+
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="/administrador" (click)="regresar()">
+                    Regresar
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+<br>
+<div *ngIf="showSuccess" class="alert alert-success" role="alert">
+    <div>
+        <h3>{{ message }}</h3>
+    </div>
+</div>
+<br>
+<form [formGroup]="anuncioForm" (ngSubmit)="subir()" [ngClass]="{'was-validated':! anuncioForm.pristine}">
+
+    <div class="container center-block">
+        <div class="row justify-content-center">
+            <div class="card" style="width: 110rem;">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="file">Select a file</label>
+                                <input type="file" (change)="fileUploadInAngular($event)" formControlName="imagen" />
+                                <button class="btn btn-primary" (click)="uploadFileToServer()">
+                                    upload
+                                </button>
+                            </div>
+                            <div *ngIf="fileUploaded">
+                                {{ messageUpload }}
+                            </div>
+                        </div>
+
+                        <b>Nombre:</b>
+                        <small>Introduzca el nombre de su Anuncio</small>
+
+                        <div class="col-md-12">
+                            <input type="text" placeholder="Nombre" class="form-control" required
+                                formControlName="nombre">
+                            <div [hidden]="anuncioForm.controls.nombre.valid || anuncioForm.controls.nombre.pristine"
+                                class="alert alert-danger">
+                                Campo requerido!
+                            </div>
+                        </div>
+                        <br>
+                        <b>costo:</b>
+                        <small>Introduzca el costo que tendra el anuncio</small>
+
+                        <div class="col-md-12">
+                            <input type="text" placeholder="Costo" class="form-control" required
+                                formControlName="costo">
+                            <div [hidden]="anuncioForm.controls.costo.valid || anuncioForm.controls.costo.pristine"
+                                class="alert alert-danger">
+                                Campo requerido!
+                            </div>
+                        </div>
+                        <br>
+                        <b>Dias:</b>
+                        <small>Introduzca el numero de dias que estara el anuncio</small>
+
+                        <div class="col-md-12">
+                            <input type="text" placeholder="Dias" class="form-control" required formControlName="dias">
+                            <div [hidden]="anuncioForm.controls.dias.valid || anuncioForm.controls.dias.pristine"
+                                class="alert alert-danger">
+                                Campo requerido!
+                            </div>
+                        </div>
+                        <br>
+                        <b>Fecha Creacion:</b>
+                        <small>Introduzca la fecha de Creacion del Anuncio</small>
+
+                        <div class="col-md-12">
+                            <input type="text" placeholder="yyyy/MM/DD" class="form-control" required
+                                formControlName="fecha">
+                            <div [hidden]="anuncioForm.controls.fecha.valid || anuncioForm.controls.fecha.pristine"
+                                class="alert alert-danger">
+                                Campo requerido!
+                            </div>
+                        </div>
+                        <br>
+                        <b>Etiqueta:</b>
+                        <small>Seleccione una etiqueta para su Revista</small>
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <select name="etiqueta" class="custom-select d-block w-100" id="etiqueta"
+                                    formControlName="etiqueta">
+                                    <option [ngValue]="null">Seleccione una opcion...</option>
+                                    <option *ngFor="let option of etiquetaEnum | keyvalue" [ngValue]="option.key">
+                                        {{option.value}}
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <b>Texto:</b>
+                                    <small>Introduzca el texto que tendra su anuncio (Es Opcional)</small>
+            
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="Texto" class="form-control"
+                                        formControlName="texto" />
+            
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <b>Video:</b>
+                                    <small>Introduzca el link del video para su anuncio (Es Opcional)</small>
+            
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="video" class="form-control"
+                                        formControlName="video" />
+            
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" [disabled]="anuncioForm.invalid"
+                    class="btn btn-primary btn-lg btn-block" (click)="uploadFileToServer()">Publicar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
